@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -47,7 +48,11 @@ fun LoginScreen(
                 }
                 is NetworkResult.Success -> {
                     navController.popBackStack()
-                    navController.navigate(Screen.Home.route)
+                    navController.navigate(
+                        Screen.Home.passUserName(
+                            it.data?.userName ?: ""
+                        )
+                    )
                 }
             }
         }
@@ -66,7 +71,7 @@ fun LoginScreen(
                 text = "Login",
                 style = TextStyle(
                     fontSize = 40.sp,
-                    fontFamily = FontFamily.Cursive
+                    fontFamily = FontFamily.Serif
                 )
             )
 
@@ -75,6 +80,7 @@ fun LoginScreen(
             UserNameTextField(
                 label = "Username",
                 value = loginViewModel.state.userName,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 onValueChanged = loginViewModel::onEvent
             )
 
@@ -83,7 +89,10 @@ fun LoginScreen(
             PasswordTextField(
                 label = "Password",
                 visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                    keyboardType = KeyboardType.Password
+                ),
                 value = loginViewModel.state.password,
                 onValueChanged = loginViewModel::onEvent
             )
@@ -108,11 +117,14 @@ fun LoginScreen(
 fun UserNameTextField(
     label: String,
     value: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     onValueChanged: (AuthUiEvent.LoginUsernameChanged) -> Unit
 ) {
     TextField(
         label = { Text(text = label) },
         value = value,
+        singleLine = true,
+        keyboardOptions = keyboardOptions,
         onValueChange = {
             onValueChanged(AuthUiEvent.LoginUsernameChanged(it))
         })
@@ -131,6 +143,7 @@ fun PasswordTextField(
         value = value,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
+        singleLine = true,
         onValueChange = {
             onValueChanged(AuthUiEvent.LoginPasswordChanged(it))
         })

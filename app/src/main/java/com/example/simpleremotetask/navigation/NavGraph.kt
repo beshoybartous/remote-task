@@ -6,9 +6,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.simpleremotetask.features.home.presentation.ui.DetailsScreen
-import com.example.simpleremotetask.features.home.presentation.ui.HomeScreen
 import com.example.simpleremotetask.features.login.presentation.ui.LoginScreen
+import com.example.simpleremotetask.features.medicine.presentation.details.ui.DetailsScreen
+import com.example.simpleremotetask.features.medicine.presentation.home.ui.HomeScreen
 import com.example.simpleremotetask.utils.Constants
 
 @Composable
@@ -18,7 +18,12 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(route = Screen.Login.route) {
             LoginScreen(navController)
         }
-        composable(route = Screen.Home.route) {
+        composable(
+            route = Screen.Home.route, arguments = listOf(
+                navArgument(Constants.USER_NAME_ARGUMENT_KEY) {
+                    type = NavType.StringType
+                })
+        ) {
             HomeScreen(navController)
         }
         composable(route = Screen.Home.route) {
