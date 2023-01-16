@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class GetGreetingMessageUseCase @Inject constructor() {
     operator fun invoke(time: Int) = when (time) {
-        in 0..11 -> GOOD_MORNING
-        in 12..16 -> GOOD_AFTERNOON
-        in 17..23 -> GOOD_EVENING
+        in 5..11 -> GOOD_MORNING
+        in 12..18 -> GOOD_AFTERNOON
+        in 19..23 -> GOOD_EVENING
         else -> HELLO
     }
 }

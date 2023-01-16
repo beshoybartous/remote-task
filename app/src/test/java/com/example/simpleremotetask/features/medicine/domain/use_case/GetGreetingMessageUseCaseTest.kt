@@ -12,14 +12,14 @@ class GetGreetingMessageUseCaseTest {
     private var getGreetingMessageUseCase = GetGreetingMessageUseCase()
 
     @Test
-    fun testGoodMorningWhenTimeIsZero() {
-        val result = getGreetingMessageUseCase(0)
+    fun testGoodMorningWhenTimeIsFive() {
+        val result = getGreetingMessageUseCase(5)
         Assert.assertEquals(result, GOOD_MORNING)
     }
 
     @Test
-    fun testGoodMorningWhenTimeBetweenZeroAndEleven() {
-        val result = getGreetingMessageUseCase(5)
+    fun testGoodMorningWhenTimeBetweenFiveAndEleven() {
+        val result = getGreetingMessageUseCase(9)
         Assert.assertEquals(result, GOOD_MORNING)
     }
 
@@ -29,7 +29,6 @@ class GetGreetingMessageUseCaseTest {
         Assert.assertEquals(result, GOOD_MORNING)
     }
 
-
     @Test
     fun testGoodAfterNoonWhenTimeIsTwelve() {
         val result = getGreetingMessageUseCase(12)
@@ -37,26 +36,26 @@ class GetGreetingMessageUseCaseTest {
     }
 
     @Test
-    fun testGoodAfterNoonWhenTimeBetweenTwelveAndSixten() {
+    fun testGoodAfterNoonWhenTimeBetweenTwelveAndEighteen() {
         val result = getGreetingMessageUseCase(14)
         Assert.assertEquals(result, GOOD_AFTERNOON)
     }
 
     @Test
-    fun testGoodAfterNoonWhenTimeIsSixten() {
-        val result = getGreetingMessageUseCase(16)
+    fun testGoodAfterNoonWhenTimeIsEighteen() {
+        val result = getGreetingMessageUseCase(18)
         Assert.assertEquals(result, GOOD_AFTERNOON)
     }
 
 
     @Test
-    fun testGoodEveningNoonWhenTimeIsSeventeen() {
-        val result = getGreetingMessageUseCase(17)
+    fun testGoodEveningNoonWhenTimeIsNineteen() {
+        val result = getGreetingMessageUseCase(19)
         Assert.assertEquals(result, GOOD_EVENING)
     }
 
     @Test
-    fun testGoodAfterNoonWhenTimeBetweenSeventeenAndTwentyThree() {
+    fun testGoodAfterNoonWhenTimeBetweenNineteenAndTwentyThree() {
         val result = getGreetingMessageUseCase(20)
         Assert.assertEquals(result, GOOD_EVENING)
     }
